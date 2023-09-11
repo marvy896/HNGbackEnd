@@ -20,8 +20,8 @@ app.get('/api', (req, res) => {
         return res.status(400).json({ error: 'Missing query parameters.' });
     }
 
-    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-    const currentDay = new Date().toLocaleDateString('en-US', { weekday: 'long' }).slice(0,19) + 'Z';
+    const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+    // const currentDay = new Date().toLocaleDateString('en-US', { weekday: 'long' }).slice(0,19) + 'Z';
 
     // Get current UTC time
     const currentUtcTime = date.toISOString().slice(0,19) + 'Z';
