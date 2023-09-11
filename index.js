@@ -30,13 +30,13 @@ app.get('/api', (req, res) => {
 
 
     const response = {
-        Slack_name: slack_name,
-        Current_day: currentDay,
-        Current_UTC_time: currentUtcTime,
-        Track: track,
-        File_URL: fileUrl,
-        Source_Code_URL: sourceCodeUrl,
-        Status_Code: 200
+        slack_name: slack_name,
+        current_day: currentDay,
+        utc_time: currentUtcTime,
+        track: track,
+        github_file_url: fileUrl,
+        github_repo_url: sourceCodeUrl,
+        status_Code: 200
     };
 
     res.json(response);
@@ -45,3 +45,4 @@ app.get('/api', (req, res) => {
 app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);
 });
+
