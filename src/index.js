@@ -1,24 +1,34 @@
 import express from 'express';
-const app = express();
-const port = 3000;
+import cors from 'cors';
+import dotenv from 'dotenv';
 
-app.get('/get_info', (req, res) => {
-    // Get query parameters
+const port = process.env.PORT || 3000;
+
+dotenv.config();
+
+const app = express();
+
+app.use(cors());
+app.use(express.json());
+
+app.get('/api', (req, res) => {
     const slack_name = req.query.slack_name;
     const track = req.query.track;
 
-    // Get current day of the week
+    // Check if required query parameters are present
+    if (!slack_name || !track) {
+        return res.status(400).json({ error: 'Missing query parameters.' });
+    }
+
     const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-    const currentDay = new Date().toLocaleDateString('en-US', { weekday: 'long' });
+    const currentDay = new Date().toLocaleDateString('en-US', { weekday: 'long' }).slice(0,19) + 'Z';
 
     // Get current UTC time
     const currentUtcTime = new Date().toUTCString();
+    const fileUrl = 'https://github.com/marvy896/HNGbackEnd_endpoints/src/index.js';
+    const sourceCodeUrl = 'https://github.com/your_username/HNGbackEnd_endpoints.git';
 
-    // Get GitHub URLs
-    const fileUrl = 'https://github.com/marvy896/HNGbackEnd_endpoints/index.js';
-    const sourceCodeUrl = 'https://github.com/marvy896/HNGbackEnd_endpoints';
 
-    // Create the response JSON
     const response = {
         Slack_name: slack_name,
         Current_day: currentDay,
@@ -26,7 +36,7 @@ app.get('/get_info', (req, res) => {
         Track: track,
         File_URL: fileUrl,
         Source_Code_URL: sourceCodeUrl,
-        Status_Code: 'Success'
+        Status_Code: 200
     };
 
     res.json(response);
