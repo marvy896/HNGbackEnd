@@ -20,18 +20,18 @@ app.get('/api', (req, res) => {
         return res.status(400).json({ error: 'Missing query parameters.' });
     }
 
-    const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     const currentDay = new Date().toLocaleDateString('en-US', { weekday: 'long' }).slice(0,19) + 'Z';
 
     // Get current UTC time
-    const currentUtcTime = new Date().toUTCString();
+    const currentUtcTime = date.toISOString().slice(0,19) + 'Z';
     const fileUrl = 'https://github.com/marvy896/HNGbackEnd_endpoints/blob/main/index.js';
     const sourceCodeUrl = 'https://github.com/marvy896/HNGbackEnd_endpoints.git';
 
 
     const response = {
         slack_name: slack_name,
-        current_day: currentDay,
+        current_day: days[date.getDay()],
         utc_time: currentUtcTime,
         track: track,
         github_file_url: fileUrl,
