@@ -25,8 +25,8 @@ app.get('/api', (req, res) => {
 
     // Get current UTC time
     const currentUtcTime = date.toISOString().slice(0,19) + 'Z';
-    const fileUrl = 'https://github.com/marvy896/HNGbackEnd_endpoints/blob/main/index.js';
-    const sourceCodeUrl = 'https://github.com/marvy896/HNGbackEnd_endpoints.git';
+    const fileUrl = 'https://github.com/marvy896/HNGbackEnd/blob/main/index.js';
+    const sourceCodeUrl = 'https://github.com/marvy896/HNGbackEnd.git';
 
 
     const response = {
