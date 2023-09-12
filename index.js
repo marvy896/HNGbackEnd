@@ -20,14 +20,15 @@ app.get('/api', (req, res) => {
         return res.status(400).json({ error: 'Missing query parameters.' });
     }
 
-    const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-    const currentDay = days[date.getDay()]
+    // Corrected the usage of the 'Date' object
+    const date = new Date();
+    const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    const currentDay = days[date.getDay()];
 
     // Get current UTC time
-    const currentUtcTime = date.toISOString().slice(0,19) + 'Z';
+    const currentUtcTime = date.toISOString().slice(0, 19) + 'Z';
     const fileUrl = 'https://github.com/marvy896/HNGbackEnd/blob/main/index.js';
     const sourceCodeUrl = 'https://github.com/marvy896/HNGbackEnd.git';
-
 
     const response = {
         slack_name: slack_name,
@@ -36,7 +37,7 @@ app.get('/api', (req, res) => {
         track: track,
         github_file_url: fileUrl,
         github_repo_url: sourceCodeUrl,
-        status_Code: 200
+        status_code: 200, // Corrected 'Status_Code' to 'status_code'
     };
 
     res.json(response);
@@ -45,4 +46,3 @@ app.get('/api', (req, res) => {
 app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);
 });
-
