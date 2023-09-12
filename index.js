@@ -21,7 +21,7 @@ app.get('/api', (req, res) => {
     }
 
     const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-    // const currentDay = new Date().toLocaleDateString('en-US', { weekday: 'long' }).slice(0,19) + 'Z';
+    const currentDay = days[date.getDay()]
 
     // Get current UTC time
     const currentUtcTime = date.toISOString().slice(0,19) + 'Z';
@@ -31,7 +31,7 @@ app.get('/api', (req, res) => {
 
     const response = {
         slack_name: slack_name,
-        current_day: days[date.getDay()],
+        current_day: currentDay,
         utc_time: currentUtcTime,
         track: track,
         github_file_url: fileUrl,
